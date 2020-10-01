@@ -1,6 +1,6 @@
+#include "convolution.cpp"
 #include <iostream>
 #include <vector>
-#include "convolution.h"
 
 std::vector<double> readInVector(std::string s) {
   int prev_location = 0;
@@ -17,9 +17,10 @@ std::vector<double> readInVector(std::string s) {
 }
 
 int main() {
-  bool pack_with_zeros;
   std::vector<double> x;
   std::vector<double> w;
+  bool pack_with_zeros = true;
+
   std::string s;
   std::cin >> s;
   if(s == "false") {
@@ -29,13 +30,15 @@ int main() {
   x = readInVector(s);
   std::cin >> s;
   w = readInVector(s);
+
   std::vector<double> y;
 
   y = applyConvolution(x, w, pack_with_zeros);
-
   printVector(y);
+
+  y = applyConvolution(x, w, !pack_with_zeros);
+  printVector(y);
+
 
   return 0;
 }
-
-
